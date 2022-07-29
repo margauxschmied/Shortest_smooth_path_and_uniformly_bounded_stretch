@@ -2,8 +2,10 @@ import java.util.*;
 
 public class Dijkstra {
 
-    public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+    public Graph calculateShortestPathFromSource(Graph graph, Node source, boolean traffic) {
         source.setDistance(0);
+        source.setDistanceTraffic(0);
+
 
         Set settledNodes = new HashSet<>();
         Set unsettledNodes = new HashSet<>();
@@ -11,15 +13,29 @@ public class Dijkstra {
         unsettledNodes.add(source);
 
         while (unsettledNodes.size() != 0) {
-            Node currentNode = getLowestDistanceNode(unsettledNodes);
+            Node currentNode = getLowestDistanceNode(unsettledNodes, traffic);
             unsettledNodes.remove(currentNode);
-            for (Map.Entry< Node, Integer> adjacencyPair:
+            for (Map.Entry< Node, PairDistance> adjacencyPair:
                     currentNode.getAdjacentNodes().entrySet()) {
                 Node adjacentNode = adjacencyPair.getKey();
-                Integer edgeWeight = adjacencyPair.getValue();
-                if (!settledNodes.contains(adjacentNode)) {
-                    calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
-                    unsettledNodes.add(adjacentNode);
+                Integer edgeWeight;
+                if(traffic) {
+                    edgeWeight = adjacencyPair.getValue().getDistanceWithTrafic();
+
+                    if (!settledNodes.contains(adjacentNode)) {
+                        calculateMinimumDistanceTraffic(adjacentNode, edgeWeight, currentNode);
+
+                        unsettledNodes.add(adjacentNode);
+                    }
+                }
+                else {
+                    edgeWeight = adjacencyPair.getValue().getDistanceWithoutTrafic();
+
+                    if (!settledNodes.contains(adjacentNode)) {
+                        calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
+
+                        unsettledNodes.add(adjacentNode);
+                    }
                 }
             }
             settledNodes.add(currentNode);
@@ -27,11 +43,17 @@ public class Dijkstra {
         return graph;
     }
 
-    private static Node getLowestDistanceNode(Set < Node > unsettledNodes) {
+    private Node getLowestDistanceNode(Set < Node > unsettledNodes, boolean traffic) {
         Node lowestDistanceNode = null;
         int lowestDistance = Integer.MAX_VALUE;
         for (Node node: unsettledNodes) {
-            int nodeDistance = node.getDistance();
+            int nodeDistance;
+            if(traffic) {
+                nodeDistance = node.getDistanceTraffic();
+            }
+            else {
+                nodeDistance = node.getDistance();
+            }
             if (nodeDistance < lowestDistance) {
                 lowestDistance = nodeDistance;
                 lowestDistanceNode = node;
@@ -40,7 +62,8 @@ public class Dijkstra {
         return lowestDistanceNode;
     }
 
-    private static void calculateMinimumDistance(Node evaluationNode,
+
+    private void calculateMinimumDistance(Node evaluationNode,
                                                  Integer edgeWeigh, Node sourceNode) {
         Integer sourceDistance = sourceNode.getDistance();
         if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
@@ -51,7 +74,15 @@ public class Dijkstra {
         }
     }
 
-    private static void pathWeight(List path){
-
+    private void calculateMinimumDistanceTraffic(Node evaluationNode,
+                                          Integer edgeWeigh, Node sourceNode) {
+        Integer sourceDistance = sourceNode.getDistanceTraffic();
+        if (sourceDistance + edgeWeigh < evaluationNode.getDistanceTraffic()) {
+            evaluationNode.setDistanceTraffic(sourceDistance + edgeWeigh);
+            LinkedList shortestPath = new LinkedList<>(sourceNode.getShortestPathTraffic());
+            shortestPath.add(sourceNode);
+            evaluationNode.setShortestPath(shortestPath);
+        }
     }
+
 }
