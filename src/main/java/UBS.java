@@ -26,6 +26,14 @@ public class UBS {
         return weightP/shortestPath;
     }
 
+    public float stretch(Graph graph, LinkedList<Node> path, int i, int j){
+        LinkedList<Node> subPath = new LinkedList<>();
+        for (int n=i; n<=j; n++){
+            subPath.add(path.get(n));
+        }
+        return stretch(graph, subPath);
+    }
+
     public float stretchTraffic(Graph graph, LinkedList<Node> path){
         float weightP = pathWeightTraffic(path);
         dijkstra.calculateShortestPathFromSource(graph, path.getFirst(), true);
@@ -33,7 +41,45 @@ public class UBS {
         return weightP/shortestPath;
     }
 
-    public void interativePathFixing(){
+    public float stretchTraffic(Graph graph, LinkedList<Node> path, int i, int j){
+        LinkedList<Node> subPath = new LinkedList<>();
+        for (int n=i; n<=j; n++){
+            subPath.add(path.get(n));
+        }
+        return stretchTraffic(graph, subPath);
+    }
 
+    public float calcul(Graph graph, LinkedList<Node> path, boolean traffic){
+        float max = 0;
+
+        Node start = null;
+        Node end = null;
+        for (int i=0; i<path.size(); i++){
+            for (int j=0; j<path.size(); j++){
+                if (i<j){
+                    float n;
+                    if (traffic){
+                        n=stretchTraffic(graph, path, i, j);
+
+                    }
+                    else{
+                        n=stretch(graph, path, i, j);
+                    }
+                    if (n>max){
+                        max=n;
+                        start=path.get(i);
+                        end=path.get(j);
+                    }
+
+                }
+            }
+        }
+        System.out.println(start);
+        System.out.println(end);
+        return max;
+    }
+
+    public boolean eSmooth(float e, Graph graph, LinkedList<Node> path, boolean traffic){
+        return calcul(graph, path, traffic) < 1+e;
     }
 }

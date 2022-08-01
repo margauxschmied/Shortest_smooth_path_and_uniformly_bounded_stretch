@@ -22,7 +22,7 @@ public class Main {
 
         nodeC.addDestination(nodeE, new PairDistance(10, 10));
 
-        nodeD.addDestination(nodeE, new PairDistance(2, 12));
+        nodeD.addDestination(nodeE, new PairDistance(2, 10));
         nodeD.addDestination(nodeF, new PairDistance(1, 10));
 
         nodeF.addDestination(nodeE, new PairDistance(5, 5));
@@ -45,12 +45,14 @@ public class Main {
         path.add(nodeB);
         path.add(nodeF);
 
-        System.out.println(ubs.pathWeight(path));
+//        System.out.println(ubs.pathWeight(path));
+//
+//        System.out.println(nodeF.getDistance());
+//
+//        System.out.println(ubs.stretch(graph, path));
+//
+//        System.out.println(ubs.calcul(graph, path, false));
 
-        System.out.println(graph);
-        System.out.println(nodeF.getDistance());
-
-        System.out.println(ubs.stretch(graph, path));
 
         Graph graph2 = new Graph();
 
@@ -66,9 +68,11 @@ public class Main {
 
         System.out.println(ubs.pathWeightTraffic(path));
 
-        System.out.println(graph2);
         System.out.println(nodeF.getDistanceTraffic());
 
         System.out.println(ubs.stretchTraffic(graph2, path));
+
+
+        System.out.println(ubs.calcul(graph, path, true));
     }
 }
