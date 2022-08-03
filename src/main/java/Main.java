@@ -4,8 +4,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Dijkstra dijkstra=new Dijkstra();
-        UBS ubs=new UBS();
         ShortestSmoothPath shortestSmoothPath=new ShortestSmoothPath();
 
         Node nodeA = new Node("A");
