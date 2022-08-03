@@ -78,34 +78,5 @@ public class Main {
 
 
 
-        Node nodeA1 = new Node("A1");
-        Node nodeB1 = new Node("B1");
-        Node nodeC1 = new Node("C1");
-        Node nodeD1 = new Node("D1");
-        Node nodeE1 = new Node("E1");
-
-        nodeA1.addDestination(nodeB1, new PairDistance(1, 10));
-        nodeA1.addDestination(nodeD1, new PairDistance(1, 1));
-
-        nodeB1.addDestination(nodeC1, new PairDistance(1, 10));
-        nodeB1.addDestination(nodeE1, new PairDistance(1, 1));
-
-        nodeD1.addDestination(nodeB1, new PairDistance(1, 1));
-//        nodeD1.addDestination(nodeE1, new PairDistance(1, 1));
-
-        nodeE1.addDestination(nodeC1, new PairDistance(1, 1));
-
-
-        Graph graph1 = new Graph();
-
-        graph1.addNode(nodeA1);
-        graph1.addNode(nodeB1);
-        graph1.addNode(nodeC1);
-        graph1.addNode(nodeD1);
-        graph1.addNode(nodeE1);
-
-        System.out.println(shortestSmoothPath.iterativePathFixing((float) 2, graph1, nodeA1, nodeC1));
-
-
     }
 }
