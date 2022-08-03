@@ -2,7 +2,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UBS {
-    Dijkstra dijkstra=new Dijkstra();
+    private Dijkstra dijkstra=new Dijkstra();
+
+    private Node startStretchestPath = null;
+    private Node endStretchestPath = null;
+
+
 
     public int pathWeight(List<Node> path){
         int weight=0;
@@ -52,8 +57,6 @@ public class UBS {
     public float calcul(Graph graph, LinkedList<Node> path, boolean traffic){
         float max = 0;
 
-        Node start = null;
-        Node end = null;
         for (int i=0; i<path.size(); i++){
             for (int j=0; j<path.size(); j++){
                 if (i<j){
@@ -67,19 +70,25 @@ public class UBS {
                     }
                     if (n>max){
                         max=n;
-                        start=path.get(i);
-                        end=path.get(j);
+                        startStretchestPath=path.get(i);
+                        endStretchestPath=path.get(j);
                     }
 
                 }
             }
         }
-        System.out.println(start);
-        System.out.println(end);
         return max;
     }
 
     public boolean eSmooth(float e, Graph graph, LinkedList<Node> path, boolean traffic){
         return calcul(graph, path, traffic) < 1+e;
+    }
+
+    public Node getStartStretchestPath() {
+        return startStretchestPath;
+    }
+
+    public Node getEndStretchestPath() {
+        return endStretchestPath;
     }
 }

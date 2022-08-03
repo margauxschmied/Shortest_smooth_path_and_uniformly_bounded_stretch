@@ -3,18 +3,25 @@ import java.util.Set;
 
 public class Graph {
 
-    private Set nodes = new HashSet<>();
+    private Set<Node> nodes = new HashSet<>();
 
     public void addNode(Node nodeA) {
         nodes.add(nodeA);
     }
 
-    public Set getNodes() {
+    public Set<Node> getNodes() {
         return nodes;
     }
 
-    public void setNodes(Set nodes) {
+    public void setNodes(Set<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public void resetGraph() {
+        for (Node node: nodes){
+            node.resetDistance();
+            node.resetShortestPath();
+        }
     }
 
     @Override

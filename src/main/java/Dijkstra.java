@@ -3,6 +3,7 @@ import java.util.*;
 public class Dijkstra {
 
     public Graph calculateShortestPathFromSource(Graph graph, Node source, boolean traffic) {
+        graph.resetGraph();
         source.setDistance(0);
         source.setDistanceTraffic(0);
 
@@ -81,7 +82,7 @@ public class Dijkstra {
             evaluationNode.setDistanceTraffic(sourceDistance + edgeWeigh);
             LinkedList shortestPath = new LinkedList<>(sourceNode.getShortestPathTraffic());
             shortestPath.add(sourceNode);
-            evaluationNode.setShortestPath(shortestPath);
+            evaluationNode.setShortestPathTraffic(shortestPath);
         }
     }
 

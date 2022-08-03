@@ -34,6 +34,9 @@ public class Node {
     }
 
     public List getShortestPath() {
+//        if(shortestPath.size()!=0 && shortestPath.get(shortestPath.size()-1)!=this) {
+//            shortestPath.add(this);
+//        }
         return shortestPath;
     }
 
@@ -42,11 +45,20 @@ public class Node {
     }
 
     public List getShortestPathTraffic() {
+//        if(shortestPathTraffic.size()!=0 && shortestPathTraffic.get(shortestPathTraffic.size()-1)!=this) {
+//            shortestPathTraffic.add(this);
+//        }
         return shortestPathTraffic;
     }
 
     public void setShortestPathTraffic(List shortestPathTraffic) {
         this.shortestPathTraffic = shortestPathTraffic;
+    }
+
+    public void resetShortestPath() {
+        this.shortestPath = new LinkedList<>();
+
+        this.shortestPathTraffic = new LinkedList<>();
     }
 
     public Integer getDistance() {
@@ -55,6 +67,11 @@ public class Node {
 
     public void setDistance(Integer distance) {
         this.distance = distance;
+    }
+
+    public void resetDistance() {
+        this.distance = Integer.MAX_VALUE;
+        this.distanceTraffic = Integer.MAX_VALUE;
     }
 
     public Integer getDistanceTraffic() {
@@ -77,8 +94,8 @@ public class Node {
     public String toString() {
         return "Node{" +
                 "name='" + name + '\'' +
-                ", shortestPath=" + shortestPath +
-                ", distance=" + distance +
+//                ", shortestPath=" + shortestPath +
+//                ", distance=" + distance +
                 '}';
     }
 }
