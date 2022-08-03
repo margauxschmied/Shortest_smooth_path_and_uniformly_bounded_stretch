@@ -35,47 +35,6 @@ public class Main {
         graph.addNode(nodeE);
         graph.addNode(nodeF);
 
-//        graph = dijkstra.calculateShortestPathFromSource(graph, nodeA, false);
-
-//
-//        LinkedList path = new LinkedList<>();
-//
-//        path.add(nodeA);
-//        path.add(nodeB);
-//        path.add(nodeF);
-
-//        System.out.println(ubs.pathWeight(path));
-//
-//        System.out.println(nodeF.getDistance());
-//
-//        System.out.println(ubs.stretch(graph, path));
-//
-//        System.out.println(ubs.calcul(graph, path, false));
-
-//
-//        Graph graph2 = new Graph();
-//
-//        graph2.addNode(nodeA);
-//        graph2.addNode(nodeB);
-//        graph2.addNode(nodeC);
-//        graph2.addNode(nodeD);
-//        graph2.addNode(nodeE);
-//        graph2.addNode(nodeF);
-
-//        graph2 = dijkstra.calculateShortestPathFromSource(graph2, nodeA, true);
-
-
-//        System.out.println(ubs.pathWeightTraffic(path));
-//
-//        System.out.println(nodeF.getDistanceTraffic());
-//
-//        System.out.println(ubs.stretchTraffic(graph2, path));
-//
-//
-//        System.out.println(ubs.calcul(graph, path, true));
-
-//        shortestSmoothPath.iterativePathFixing((float) 0.1, graph, nodeA, nodeF);
-
 
 
     }
