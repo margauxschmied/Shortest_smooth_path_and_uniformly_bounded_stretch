@@ -49,7 +49,7 @@ class ShortestSmoothPathTest {
         graph1.addNode(nodeD1);
         graph1.addNode(nodeE1);
 
-        assertEquals(List.of(nodeA1, nodeB1, nodeC1), shortestSmoothPath.iterativePathFixing((float) 1, graph1, nodeA1, nodeC1));
+        assertEquals(List.of(nodeA1, nodeB1, nodeC1), shortestSmoothPath.iterativePathFixing((float) 0.01, graph1, nodeA1, nodeC1));
 
     }
 
@@ -115,7 +115,7 @@ class ShortestSmoothPathTest {
         graph.addNode(nodeE);
         graph.addNode(nodeF);
 
-        assertEquals(List.of(nodeA, nodeB, nodeF), shortestSmoothPath.iterativePathFixing((float) 1, graph, nodeA, nodeF));
+        assertEquals(List.of(nodeA, nodeB, nodeF), shortestSmoothPath.iterativePathFixing((float) 0.01, graph, nodeA, nodeF));
 
     }
 
